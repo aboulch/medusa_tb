@@ -45,18 +45,16 @@ print("searching...")
 footprint = geojson_to_wkt(read_geojson(args.geojson))
 if args.sentinel == 1:
     products = api.query(footprint,
-                         initial_date=startdate,
-                         end_date=enddate,
+                         date=(startdate,enddate),
                          platformname = 'Sentinel-1',
                          producttype = "GRD"
                          )
 elif args.sentinel == 2:
     products = api.query(footprint,
-                         initial_date=startdate,
-                         end_date=enddate,
+                        date=(startdate,enddate),
                          platformname = 'Sentinel-2'
                          )
-# print(products)
+print("  product number: ",len(products))
 # download all results from the search
 print("downloading...")
 api.download_all(products)
